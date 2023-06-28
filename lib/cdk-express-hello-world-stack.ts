@@ -25,8 +25,8 @@ export class CdkExpressHelloWorldStack extends cdk.Stack {
     const expressLambda = new lambda.Function(this, "CDKExpressHelloWorld", {
       functionName: 'CDKExpressHelloWorld',
       runtime: lambda.Runtime.NODEJS_18_X,
-      code: lambda.Code.fromAsset('../server/build'),
-      handler: 'index.handler'
+      code: lambda.AssetCode.fromAsset('./server/build'),
+      handler: 'server.handler'
     })
 
     const api = new apiGateway.RestApi(this, 'CDKExpressHelloWorldApi', {
