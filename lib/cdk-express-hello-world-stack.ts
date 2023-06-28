@@ -25,7 +25,7 @@ export class CdkExpressHelloWorldStack extends cdk.Stack {
     const expressLambda = new lambda.Function(this, "CDKExpressHelloWorld", {
       functionName: 'CDKExpressHelloWorld',
       runtime: lambda.Runtime.NODEJS_18_X,
-      code: lambda.AssetCode.fromAsset('./server/build'),
+      code: lambda.AssetCode.fromAsset('./server'),
       handler: 'server.handler'
     })
 
@@ -34,9 +34,10 @@ export class CdkExpressHelloWorldStack extends cdk.Stack {
     })
 
     const getIntegration = new apiGateway.LambdaIntegration(expressLambda, {
-      requestTemplates: { "text/html": '{"statusCode": "200"} '}
+      requestTemplates: { "text/html": '{"statusCode": "200"}'}
     })
-
+    const theyLive = api.root.addResource('I-have-come-here-to-kick-ass-and-chew-bubblegum')
+    theyLive.addMethod("GET", getIntegration)
     api.root.addMethod("GET", getIntegration)
   }
 }
