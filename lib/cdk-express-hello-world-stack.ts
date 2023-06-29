@@ -52,8 +52,12 @@ export class CdkExpressHelloWorldStack extends cdk.Stack {
     const getIntegration = new apiGateway.LambdaIntegration(expressLambda, {
       requestTemplates: { "text/html": '{"statusCode": "200"}'}
     })
+    const postIntegration = new apiGateway.LambdaIntegration(expressLambda, {
+      requestTemplates: { "text/html": '{"statusCode": "200"}'}
+    })
     const theyLive = api.root.addResource('they-live')
     theyLive.addMethod("GET", getIntegration)
+    theyLive.addMethod("POST", postIntegration)
     api.root.addMethod("GET", getIntegration)
   }
 }
